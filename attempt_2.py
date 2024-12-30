@@ -82,6 +82,25 @@ time.sleep(1)
 breadcrumb_links = driver.find_element(By.CSS_SELECTOR, 'nav[aria-label="breadcrumb"]')
 
 breadcrumb_data = breadcrumb_links.text.split("\n")
+breadcrumb_data_len = (len(breadcrumb_data))
+
+if breadcrumb_data_len ==6 and "attainment" in breadcrumb_links.text.lower() :
+    social_policies = breadcrumb_data[1]
+    attainment = breadcrumb_data[3]
+    sub_category = breadcrumb_data[4]
+    indicator = breadcrumb_data[5]
+else:
+    try:
+        social_policies = breadcrumb_data[1]
+        attainment = breadcrumb_data[2]
+        sub_category = breadcrumb_data[3]
+        indicator = breadcrumb_data[breadcrumb_data_len-1]
+    except:
+        social_policies = breadcrumb_data[1]
+        indicator = breadcrumb_data[breadcrumb_data_len-1]
+        attainment = ""
+        sub_category = ""
+'''
 try:
     social_policies = breadcrumb_data[1]
     attainment = breadcrumb_data[3]
@@ -89,7 +108,7 @@ try:
     indicator = breadcrumb_data[5] or None
 except IndexError:
     indicator= None
-
+'''
 
 a = driver.find_elements(By.CLASS_NAME,"info-card-content")
 
